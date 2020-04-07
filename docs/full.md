@@ -5,35 +5,33 @@ description: One page documentation
 permalink: /docs/usage/pm2-doc-single-page/
 ---
 
+## 欢迎
 
-## Welcome!
+欢迎查看PM2使用指引!
 
-Welcome to the PM2 Quick Start!
+`PM2`是一款进程守护管理的工具，能够帮助你管理和维护你的线上应用程序。PM2简单易用，并且提供了一个易于上手的`CLI`工具，通过`NPM`安装后即可使用。
 
-PM2 is daemon process manager that will help you manage and keep your application online. Getting started with PM2 is straightforward, it is offered as a simple and intuitive CLI, installable via NPM.
+## 安装
 
-
-## Installation
-
-The latest PM2 version is installable with NPM or Yarn:
+您可以使用`NPM`或`Yarn`来安装最新版的`PM2`：
 
 ```bash
 $ npm install pm2@latest -g
-# or
+# 或者
 $ yarn global add pm2
 ```
 
-To install Node.js and NPM you can use [NVM](https://yoember.com/nodejs/the-best-way-to-install-node-js/)
+如果您需要先安装`Node.js`和`NPM`，推荐您使用[NVM](https://yoember.com/nodejs/the-best-way-to-install-node-js/)
 
-## Start an app
+## 启动一个应用
 
-The simplest way to start, daemonize and monitor your application is by using this command line:
+启动和监控您的应用非常简单，使用如下命令即可:
 
 ```bash
 $ pm2 start app.js
 ```
 
-Or start any other application easily:
+当然也有其他方式启动其他类型的应用：
 
 ```bash
 $ pm2 start bashscript.sh
@@ -41,45 +39,51 @@ $ pm2 start python-app.py --watch
 $ pm2 start binary-file -- --port 1520
 ```
 
-Some options you can pass to the CLI:
+此外，您还可以在使用CLI时附加一些选项：
 
 ```bash
-# Specify an app name
+# Specify an app name 指定应用的名称
 --name <app_name>
 
-# Watch and Restart app when files change
+# Watch and Restart app when files change 当文件改变时重启应用
 --watch
 
-# Set memory threshold for app reload
+# Set memory threshold for app reload 设置应用reload时的内存阈值
 --max-memory-restart <200MB>
 
-# Specify log file
+# Specify log file 指定日志存放路径
 --log <log_path>
 
-# Pass extra arguments to the script
+# Pass extra arguments to the script 附加额外的参数给启动程序
 -- arg1 arg2 arg3
 
-# Delay between automatic restarts
+# Delay between automatic restarts 设置自动重启的延迟时间
 --restart-delay <delay in ms>
 
-# Prefix logs with time
+# Prefix logs with time 为位置添加时间前缀
 --time
 
-# Do not auto restart app
+# Do not auto restart app 设置应用不进行自动重启
 --no-autorestart
 
-# Specify cron for forced restart
+# Specify cron for forced restart 设置计划任务强制重启
 --cron <cron_pattern>
 
-# Attach to application log
+# Attach to application log 设置附加应用日志
 --no-daemon
 ```
 
 As you can see many options are available to manage your application with PM2. You will discover them depending on your use case.
 
+如您所见，PM2提供了如此多的选项帮助您管理应用。在不断实践中您可以加深对他们的理解和熟练度。
+
 ## Managing processes
 
+## 管理进程
+
 Managing application state is simple here are the commands:
+
+管理应用状态，可以使用如下命令：
 
 ```bash
 $ pm2 restart app_name
@@ -89,12 +93,18 @@ $ pm2 delete app_name
 ```
 
 Instead of `app_name` you can pass:
-- `all` to act on all processes
-- `id` to act on a specific process id
+其中的`app_name`，您可以替换为：
+
+- `all` to act on all processes 对所有的进程生效
+- `id` to act on a specific process id 凭id仅对指定的进程生效
 
 ## Check status, logs, metrics
 
+## 检查状态和日志图表矩阵
+
 Now that you have started this application, you can check his status, logs, metrics and even get the online dashboard with <a href="https://pm2.io" target="_blank">pm2.io</a>.
+
+在启动期间，您可以通过图表矩阵的形式查看应用的状态和日志，可以在<a href="https://pm2.io" target="_blank">pm2.io</a>这里详细了解管理仪表应用。
 
 ### List managed applications
 
