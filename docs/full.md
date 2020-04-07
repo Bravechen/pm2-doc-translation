@@ -104,11 +104,15 @@ Instead of `app_name` you can pass:
 
 Now that you have started this application, you can check his status, logs, metrics and even get the online dashboard with <a href="https://pm2.io" target="_blank">pm2.io</a>.
 
-在启动期间，您可以通过图表矩阵的形式查看应用的状态和日志，可以在<a href="https://pm2.io" target="_blank">pm2.io</a>这里详细了解管理仪表应用。
+在启动期间，您可以通过图表矩阵的形式查看应用的状态和日志，可以在<a href="https://pm2.io" target="_blank">pm2.io</a>这里详细了解控制面板。
 
 ### List managed applications
 
+### 罗列管理中的应用
+
 List the status of all application managed by PM2:
+
+使用下面的命令可以列出当前管理中的应用：
 
 ```bash
 $ pm2 [list|ls|status]
@@ -118,7 +122,11 @@ $ pm2 [list|ls|status]
 
 ### Display logs
 
+### 浏览日志
+
 To display logs in realtime:
+
+想要查看实时日志，可以使用：
 
 ```bash
 $ pm2 logs
@@ -126,13 +134,19 @@ $ pm2 logs
 
 To dig in older logs:
 
+还可以指定浏览过往日志的范围：
+
 ```bash
 $ pm2 logs --lines 200
 ```
 
 ### Terminal Based Dashboard
 
+### 基于终端的控制面板
+
 Here is a realtime dashboard that fits directly into your terminal:
+
+使用如下命令，可以在终端打开一个实时更新的控制面板：
 
 ```bash
 $ pm2 monit
@@ -142,7 +156,11 @@ $ pm2 monit
 
 ### pm2.io: Monitoring & Diagnostic Web Interface
 
+### [pm2.io](http://pm2.io): 监控和诊断的网络接口
+
 Web based dashboard, cross servers with diagnostic system:
+
+基于网页的跨服务诊断系统控制面板：
 
 ```bash
 $ pm2 plus
@@ -152,9 +170,15 @@ $ pm2 plus
 
 ## Cluster mode
 
+## 集群模式(`Cluster mode`)
+
 For Node.js applications, PM2 includes an automatic load balancer that will share all HTTP[s]/Websocket/TCP/UDP connections between each spawned processes.
 
+对于`Node.js`应用，`PM2`包含一个自动的负载均衡器，可以处理进程之间的各种类型连接，包括：HTTP/HTTPS/Websocket/TCP/UDP。
+
 To start an application in Cluster mode:
+
+使用集群模式承载应用可以这样做：
 
 ```
 $ pm2 start app.js -i max
@@ -162,16 +186,24 @@ $ pm2 start app.js -i max
 
 Read more about cluster mode [here](/docs/usage/cluster-mode/).
 
+您可以从[这篇文档](/docs/usage/cluster-mode/)详细的了解集群模式。
+
 ## Ecosystem File
+
+## 环境配置文件
 
 You can also create a configuration file, called Ecosystem File, to manage multiple applications.
 To generate an Ecosystem file:
+
+除了使用命令行进行控制，您也可以创建一份环境配置文件，以便于管理不同类型的应用。要创建该文件，请使用如下命令：
 
 ```bash
 $ pm2 ecosystem
 ```
 
 This will generate and ecosystem.config.js file:
+
+这将会自动生成一份`ecosystem.config.js`文件：
 
 ```javascript
 module.exports = {
@@ -193,15 +225,23 @@ module.exports = {
 
 And start it easily:
 
+使用起来很简单：
+
 ```bash
 $ pm2 start process.yml
 ```
 
 Read more about application declaration [here](/docs/usage/application-declaration/).
 
+您可以通过浏览[这篇文档](/docs/usage/application-declaration/)想起了解应用管理的配置方法。
+
 ## Setup startup script
 
+## 设置启动脚本
+
 Restarting PM2 with the processes you manage on server boot/reboot is critical. To solve this, just run this command to generate an active startup script:
+
+在服务器上重启PM2管理的应用进程是需要谨慎注意的。为了解决这个问题，可以尝试下运行这个命令生成一份启动脚本：
 
 ```bash
 $ pm2 startup
@@ -209,14 +249,21 @@ $ pm2 startup
 
 And to freeze a process list for automatic respawn:
 
+并且可以保存一份配置用于重置：
+
 ```bash
 $ pm2 save
 ```
 Read more about startup script generator [here](/docs/usage/startup/).
 
+有关生成启动脚本的要点，可详细阅读[这篇文档](/docs/usage/startup/)。
+
 ## Restart application on changes
 
+## 在文件改变时重启应用
+
 It's pretty easy with the `--watch` option:
+简单的加上`--watch`选项即可达成：
 
 ```bash
 $ cd /path/to/my/app
@@ -225,11 +272,19 @@ $ pm2 start env.js --watch --ignore-watch="node_modules"
 
 This will watch & restart the app on any file change from the current directory + all subfolders and it will ignore any changes in the node_modules folder `--ignore-watch="node_modules"`. 
 
+上面的命令将会启动监控，并在项目目录和所有子目录中的文件发生改变时重启应用。请放心，我们用`--ignore-watch="node_modules"`选项排除了`node_modules`目录。
+
 You can then use `pm2 logs` to check for restarted app logs.
+
+如果您想要查看重启应用的日志，记得使用`pm2 logs`。
 
 ## Updating PM2
 
+## 更新PM2
+
 We made it simple, there is no breaking change between releases and the procedure is straightforward:
+
+简单起见，各个release版本之间暂无破坏性的修改，并且更新模块的命令也很简洁：
 
 ```bash
 npm install pm2@latest -g
@@ -237,59 +292,65 @@ npm install pm2@latest -g
 
 Then update the in-memory PM2 :
 
+如果要热更新?PM2的话，可以这样：
+
 ```bash
 pm2 update
 ```
 
 ## CheatSheet
 
+## 备忘单
+
 Here are some commands that are worth knowing. Just try them with a sample application or with your current web application on your development machine:
 
-```bash
-# Fork mode
-pm2 start app.js --name my-api # Name process
+这里有一些命令值得您留意，他们很有用。只需在简单的例子中稍微尝试下，您就会明白如何在当前的项目或者开发工程中应用他们了：
 
-# Cluster mode
-pm2 start app.js -i 0        # Will start maximum processes with LB depending on available CPUs
-pm2 start app.js -i max      # Same as above, but deprecated.
-pm2 scale app +3             # Scales `app` up by 3 workers
+```bash
+# Fork mode 分支模式
+pm2 start app.js --name my-api # Name process 进程名称
+
+# Cluster mode 集群模式
+pm2 start app.js -i 0        # Will start maximum processes with LB depending on available CPUs 这将会按照计算机CPU核心数的最大值启动同等数量的进程。
+pm2 start app.js -i max      # Same as above, but deprecated. 功能同上，但是已经废弃
+pm2 scale app +3             # Scales `app` up by 3 workers 
 pm2 scale app 2              # Scales `app` up or down to 2 workers total
 
-# Listing
+# Listing 列表展示
 
-pm2 list               # Display all processes status
-pm2 jlist              # Print process list in raw JSON
-pm2 prettylist         # Print process list in beautified JSON
+pm2 list               # Display all processes status 展示所有进程状态
+pm2 jlist              # Print process list in raw JSON 将进程信息使用未格式化JSON展示
+pm2 prettylist         # Print process list in beautified JSON 采用格式化JSON展示进程信息
 
-pm2 describe 0         # Display all informations about a specific process
+pm2 describe 0         # Display all informations about a specific process 展示特定进程的所有信息
 
-pm2 monit              # Monitor all processes
+pm2 monit              # Monitor all processes 监控所有进程
 
-# Logs
+# Logs 日志
 
-pm2 logs [--raw]       # Display all processes logs in streaming
-pm2 flush              # Empty all log files
-pm2 reloadLogs         # Reload all logs
+pm2 logs [--raw]       # Display all processes logs in streaming 流式展示所有进行日志，使用`--raw`采用非格式化形式
+pm2 flush              # Empty all log files 清空所有日志文件
+pm2 reloadLogs         # Reload all logs 重新载入所有日志
 
-# Actions
+# Actions 
 
-pm2 stop all           # Stop all processes
-pm2 restart all        # Restart all processes
+pm2 stop all           # Stop all processes 停止所有进程
+pm2 restart all        # Restart all processes 重启所有进程
 
-pm2 reload all         # Will 0s downtime reload (for NETWORKED apps)
+pm2 reload all         # Will 0s downtime reload (for NETWORKED apps) 零停机重载(适用于网络应用`NETWORKED apps`)
 
-pm2 stop 0             # Stop specific process id
-pm2 restart 0          # Restart specific process id
+pm2 stop 0             # Stop specific process id 按id停止指定进程
+pm2 restart 0          # Restart specific process id 按id重启指定进程
 
-pm2 delete 0           # Will remove process from pm2 list
-pm2 delete all         # Will remove all processes from pm2 list
+pm2 delete 0           # Will remove process from pm2 list 从pm2的管理列表中移除指定进程
+pm2 delete all         # Will remove all processes from pm2 list 从pm2的管理列表中移除所有进程
 
-# Misc
+# Misc  杂项
 
-pm2 reset <process>    # Reset meta data (restarted time...)
-pm2 updatePM2          # Update in memory pm2
-pm2 ping               # Ensure pm2 daemon has been launched
-pm2 sendSignal SIGUSR2 my-app # Send system signal to script
+pm2 reset <process>    # Reset meta data (restarted time...) 重置`meta`数据(restarted time...)
+pm2 updatePM2          # Update in memory pm2 热启动pm2 ?
+pm2 ping               # Ensure pm2 daemon has been launched 检测pm2守护进程启动与否
+pm2 sendSignal SIGUSR2 my-app # Send system signal to script 向启动程序传递系统信号
 pm2 start app.js --no-daemon
 pm2 start app.js --no-vizion
 pm2 start app.js --no-autorestart
@@ -297,13 +358,23 @@ pm2 start app.js --no-autorestart
 
 ## What's next?
 
+## 下一步？
+
 Learn how to declare all your application's behavior options into a [JSON configuration file](http://pm2.keymetrics.io/docs/usage/application-declaration/).
+
+了解如何声明式配置应用的行为，可以查看如何编写[JSON配置文件](http://pm2.keymetrics.io/docs/usage/application-declaration/)。
 
 Learn how to do [clean stop and restart](http://pm2.keymetrics.io/docs/usage/signals-clean-restart/) to increase reliability.
 
+了解如何[清理、停止和重启](http://pm2.keymetrics.io/docs/usage/signals-clean-restart/)以增加稳定性。
+
 Learn how to [deploy and update production applications easily](http://pm2.keymetrics.io/docs/usage/deployment/).
 
+了解如何[便捷的部署及更新生产环境中得应用](http://pm2.keymetrics.io/docs/usage/deployment/)。
+
 Monitor your production applications with [Keymetrics](https://keymetrics.io/).
+
+使用[Keymetrics](https://keymetrics.io/)监控您在生产环境中的应用。
 
 ## How to update PM2
 
