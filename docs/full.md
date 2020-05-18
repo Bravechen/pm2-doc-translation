@@ -86,10 +86,10 @@ Managing application state is simple here are the commands:
 管理应用状态，可以使用如下命令：
 
 ```bash
-$ pm2 restart app_name
-$ pm2 reload app_name
-$ pm2 stop app_name
-$ pm2 delete app_name
+$ pm2 restart app_name # 重启
+$ pm2 reload app_name # 冷启动？
+$ pm2 stop app_name # 关闭应用
+$ pm2 delete app_name # 删除应用
 ```
 
 Instead of `app_name` you can pass:
@@ -190,7 +190,7 @@ Read more about cluster mode [here](/docs/usage/cluster-mode/).
 
 ## Ecosystem File
 
-## 环境配置文件
+## 环境和系统配置文件
 
 You can also create a configuration file, called Ecosystem File, to manage multiple applications.
 To generate an Ecosystem file:
@@ -380,11 +380,15 @@ Monitor your production applications with [Keymetrics](https://keymetrics.io/).
 
 Install the latest pm2 version:
 
+安装pm2最新的版本：
+
 ```bash
 npm install pm2@latest -g
 ```
 
 Then update the in-memory PM2 :
+
+热更新pm2:
 
 ```bash
 pm2 update
@@ -393,19 +397,31 @@ pm2 update
 
 ## Ecosystem File
 
+## 环境和系统配置文件
+
 PM2 empowers your process management workflow. It allows you to fine-tune the behavior, options, environment variables, logs files of each application via a process file. It's particularly useful for micro-service based applications.
+
+PM2增强了应用进程的管理工作流。它允许我们通过一份配置文件灵活的调整运行行为、设置、环境变量和日志文件。这对于基于微服务的应用。
 
 Configuration format supported are Javascript, JSON and YAML.
 
+配置文件的格式支持`Javascript`、`JSON`以及`YAML`。
+
 ## Generate configuration
 
+## 生成配置文件
+
 To generate a sample process file you can type this command:
+
+只用简单命令就可以生成一份配置文件
 
 ```
 pm2 ecosystem
 ```
 
 This will generate a sample `ecosystem.config.js`:
+
+这将会产生一份简单的`ecosystem.config.js`:
 
 ```javascript
 module.exports = {
@@ -424,11 +440,16 @@ module.exports = {
 
 Once edited at your convenience you can start/restart/stop/delete this file via CLI:
 
+当修改了配置文件之后，我们可以在命令行控制台使用`start/restart/stop/delete`命令使其生效。
+
+
 ```bash
 $ pm2 [start|restart|stop|delete] ecosystem.config.js
 ```
 
 Checkout [the section about acting with CLI](#cli) on ecosystem.config.js to know more.
+
+您可以阅读[the section about acting with CLI](#cli)这篇文章了解关于`ecosystem.config.js`更多内容。
 
 ### Javascript format
 
